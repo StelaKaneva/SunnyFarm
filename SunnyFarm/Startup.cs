@@ -8,6 +8,7 @@ namespace SunnyFarm
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using SunnyFarm.Data;
+    using SunnyFarm.Infrastructure;
 
     public class Startup
     {
@@ -21,7 +22,7 @@ namespace SunnyFarm
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddDbContext<ApplicationDbContext>(options => options
+                .AddDbContext<SunnyFarmDbContext>(options => options
                     .UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDatabaseDeveloperPageExceptionFilter();
@@ -34,7 +35,7 @@ namespace SunnyFarm
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<SunnyFarmDbContext>();
 
             services.AddControllersWithViews();
         }
@@ -42,6 +43,8 @@ namespace SunnyFarm
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.PrepareDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
