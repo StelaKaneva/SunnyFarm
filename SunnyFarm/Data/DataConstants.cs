@@ -7,7 +7,7 @@
         public const int LastNameMinLength = 2;
         public const int LastNameMaxLength = 30;
         public const int PhoneMinLength = 9;
-        public const int PhoneMaxLength = 14;
+        public const int PhoneMaxLength = 20;
         public const int AddressMinLength = 20;
         public const int AddressMaxLength = 120;
         public const int WorkingHoursMinLength = 8;
