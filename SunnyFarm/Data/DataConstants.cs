@@ -14,5 +14,11 @@
         public const int WorkingHoursMaxLength = 100;
         public const int ProductNameMinLength = 3;
         public const int ProductNameMaxLength = 60;
+        public const int ProductDescriptionMinLength = 10;
+        public const int ProductSizeMinValue = 1;
+        public const int ProductSizeMaxValue = 999;
+        public const int ProductPriceMinValue = 1;
+        public const int ProductPriceMaxValue = 999;
+
     }
 }

@@ -19,13 +19,11 @@
 
         public DbSet<Shop> Shops { get; set; }
 
-        public DbSet<PriceSizeCombination> PriceSizeCombinations { get; set; }
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<PriceSizeCombination>().Property(p => p.Price).HasColumnType("decimal(4,2)");
+            builder.Entity<Product>().Property(p => p.Price).HasColumnType("decimal(5,2)");
         }
     }
 }

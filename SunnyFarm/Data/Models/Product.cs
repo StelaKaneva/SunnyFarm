@@ -6,17 +6,13 @@
 
     public class Product
     {
-        public Product()
-        {
-            this.PriceSizeCombinations = new List<PriceSizeCombination>();
-        }
-
         public int Id { get; init; }
 
         [Required]
         [MaxLength(ProductNameMaxLength)]
         public string Name { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         [Required]
@@ -26,6 +22,8 @@
 
         public Category Category { get; set; }
 
-        public ICollection<PriceSizeCombination> PriceSizeCombinations { get; set; }
+        public int Size { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

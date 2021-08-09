@@ -10,8 +10,8 @@ using SunnyFarm.Data;
 namespace SunnyFarm.Data.Migrations
 {
     [DbContext(typeof(SunnyFarmDbContext))]
-    [Migration("20210804124204_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210809125151_AddProductsInquiriesCategoriesShopsTables")]
+    partial class AddProductsInquiriesCategoriesShopsTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,21 +221,6 @@ namespace SunnyFarm.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PriceSizeCombinationProduct", b =>
-                {
-                    b.Property<int>("PriceSizeCombinationsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PriceSizeCombinationsId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("PriceSizeCombinationProduct");
-                });
-
             modelBuilder.Entity("SunnyFarm.Data.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -286,24 +271,6 @@ namespace SunnyFarm.Data.Migrations
                     b.ToTable("Inquiries");
                 });
 
-            modelBuilder.Entity("SunnyFarm.Data.Models.PriceSizeCombination", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(4,2)");
-
-                    b.Property<int>("Size")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PriceSizeCombinations");
-                });
-
             modelBuilder.Entity("SunnyFarm.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -315,6 +282,7 @@ namespace SunnyFarm.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
@@ -325,6 +293,12 @@ namespace SunnyFarm.Data.Migrations
                         .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<int>("Size")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -407,21 +381,6 @@ namespace SunnyFarm.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PriceSizeCombinationProduct", b =>
-                {
-                    b.HasOne("SunnyFarm.Data.Models.PriceSizeCombination", null)
-                        .WithMany()
-                        .HasForeignKey("PriceSizeCombinationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SunnyFarm.Data.Models.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
