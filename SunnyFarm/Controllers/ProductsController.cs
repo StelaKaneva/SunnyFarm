@@ -21,6 +21,26 @@
             Categories = this.GetProductCategories()
         });
 
+        public IActionResult All()
+        {
+            var cars = this.data
+                .Products
+                .OrderBy(p => p.CategoryId)
+                .ThenByDescending(p => p.Price)
+                .Select(p => new ProductListingViewModel
+                {
+                    Id = p.Id,
+                    Name = p.Name,
+                    ImageUrl = p.ImageUrl,
+                    Price = p.Price,
+                    Size = p.Size,
+                    Category = p.Category.Name
+                })
+                .ToList();
+
+            return View(cars);
+        }
+
         [HttpPost]
         public IActionResult Add(AddProductFormModel product)
         {
@@ -43,13 +63,14 @@
                 ImageUrl = product.ImageUrl,
                 CategoryId = product.CategoryId,
                 Size = product.Size,
-                Price = product.Price
+                Price = product.Price,
+                IsAvailable = true
             };
 
             this.data.Products.Add(productData);
             this.data.SaveChanges();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(All));
         }
 
         private IEnumerable<ProductCategoryViewModel> GetProductCategories()

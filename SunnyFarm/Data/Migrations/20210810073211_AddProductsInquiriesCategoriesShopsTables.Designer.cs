@@ -10,7 +10,7 @@ using SunnyFarm.Data;
 namespace SunnyFarm.Data.Migrations
 {
     [DbContext(typeof(SunnyFarmDbContext))]
-    [Migration("20210809125151_AddProductsInquiriesCategoriesShopsTables")]
+    [Migration("20210810073211_AddProductsInquiriesCategoriesShopsTables")]
     partial class AddProductsInquiriesCategoriesShopsTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -288,6 +288,9 @@ namespace SunnyFarm.Data.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()

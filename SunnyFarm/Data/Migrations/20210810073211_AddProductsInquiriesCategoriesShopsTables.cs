@@ -62,7 +62,8 @@ namespace SunnyFarm.Data.Migrations
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Size = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(5,2)", nullable: false)
+                    Price = table.Column<decimal>(type: "decimal(5,2)", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
