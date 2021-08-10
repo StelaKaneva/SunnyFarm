@@ -21,12 +21,39 @@
             Categories = this.GetProductCategories()
         });
 
-        public IActionResult All()
+        public IActionResult All(
+            string category, 
+            string searchTerm,
+            ProductSorting sorting)
         {
-            var cars = this.data
-                .Products
-                .OrderBy(p => p.CategoryId)
-                .ThenByDescending(p => p.Price)
+            var productsQuery = this.data.Products.AsQueryable(); // Взима заявката към базата за продуктите
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                productsQuery = productsQuery.Where(
+                    c => c.Category.Name == category);
+            }
+
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                productsQuery = productsQuery.Where(
+                    p => p.Name.ToLower().Contains(searchTerm.ToLower()) ||
+                    p.Description.ToLower().Contains(searchTerm.ToLower()) ||
+                    p.Category.Name.ToLower().Contains(searchTerm.ToLower()));
+            }
+
+            productsQuery = sorting switch
+            {
+                ProductSorting.Category => productsQuery.OrderBy(p => p.CategoryId).ThenByDescending(p => p.Price),
+                ProductSorting.PriceAscending => productsQuery.OrderBy(p => p.Price),
+                ProductSorting.PriceDescending => productsQuery.OrderByDescending(p => p.Price),
+                ProductSorting.SizeAscending => productsQuery.OrderBy(p => p.Size),
+                ProductSorting.SizeDescending => productsQuery.OrderByDescending(p => p.Size),
+                ProductSorting.DateCreated => productsQuery.OrderByDescending(p => p.Id),
+                _ => productsQuery.OrderBy(p => p.CategoryId).ThenByDescending(p => p.Price)
+            };
+            
+            var products = productsQuery
                 .Select(p => new ProductListingViewModel
                 {
                     Id = p.Id,
@@ -38,7 +65,17 @@
                 })
                 .ToList();
 
-            return View(cars);
+            var productCategories = this.data.Categories.Select(c => c.Name).ToList();
+
+
+            return View(new AllProductsQueryModel 
+            { 
+                Products = products,
+                Categories = productCategories,
+                SearchTerm = searchTerm,
+                Category = category,
+                Sorting = sorting
+            });
         }
 
         [HttpPost]
