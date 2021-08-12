@@ -10,6 +10,8 @@
         public const int PhoneMaxLength = 20;
         public const int AddressMinLength = 20;
         public const int AddressMaxLength = 120;
+        public const int ShopNameMinLength = 5;
+        public const int ShopNameMaxLength = 30;
         public const int WorkingHoursMinLength = 8;
         public const int WorkingHoursMaxLength = 100;
         public const int ProductNameMinLength = 3;

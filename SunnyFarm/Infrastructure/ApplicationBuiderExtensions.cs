@@ -22,7 +22,28 @@
 
             SeedProducts(data);
 
+            SeedShops(data);
+
             return app;
+        }
+
+        private static void SeedShops(SunnyFarmDbContext data)
+        {
+            if (data.Shops.Any())
+            {
+                return;
+            }
+
+            data.Shops.AddRange(new[]
+            {
+                new Shop{ Name = "Магазин - Русе", Address = "Русе, ул. Александровска - 35", Phone = "0888 987 274", WorkingHours = "10:00 - 19:00", ImageUrl ="https://beekind.com/images/insidenewstore2015.jpg"},
+                new Shop{ Name = "Магазин - София", Address = "София, бул. България - 12", Phone = "0888 683 970", WorkingHours = "09:00 - 20:00", ImageUrl ="https://www.azuremagazine.com/wp-content/uploads/2017/01/burts-bees-hong-kong-landini-associates-1-azure.jpg"},
+                new Shop{ Name = "Магазин - Варна", Address = "Варна, бул. Константин и Фружин - 115", Phone = "0878 307 864", WorkingHours = "10:00 - 19:00", ImageUrl ="https://makscompany.az/wp-content/uploads/2020/02/catalogp_small_705x532_110.jpg"},
+                new Shop{ Name = "Магазин - Пловдив", Address = "Пловдив, ул. Отец Паисий - 3", Phone = "0878 556 926", WorkingHours = "10:00 - 20:00", ImageUrl ="https://i.pinimg.com/564x/b7/6b/98/b76b98d7098b4cba9aa1f409dc4fcb53.jpg"},
+                new Shop{ Name = "Магазин - Велико Търново", Address = "Велико Търново, бул. Васил Левси - 156", Phone = "0888 117 594", WorkingHours = "10:00 - 20:00", ImageUrl ="https://www.fremantlemarkets.com.au/sites/default/files/styles/buskers_traders_details/public/traders/200/image103.jpg?itok=051zu69U"}
+            });
+
+            data.SaveChanges();
         }
 
         private static void SeedProducts(SunnyFarmDbContext data)

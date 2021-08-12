@@ -1,0 +1,40 @@
+﻿@model AddShopFormModel
+
+@{
+    ViewData["Title"] = "Добавяне на магазини";
+}
+
+<div class="row">
+    <div class=" col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">Добавяне на магазин</h2>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Име</label>
+                <input class="form-control" asp-for="Name" placeholder="Магазин - Русе">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address">Адрес</label>
+                <input class="form-control" asp-for="Address" placeholder="Русе, ул. Александровска - 35">
+                <span asp-validation-for="Address" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone">Телефон</label>
+                <input class="form-control" asp-for="Phone" placeholder="0888 697 492">
+                <span asp-validation-for="Phone" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="WorkingHours">Работно време</label>
+            <input class="form-control" asp-for="WorkingHours" placeholder="10:00 - 19:00">
+            <span asp-validation-for="WorkingHours" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+            <label asp-for="ImageUrl">Изображение</label>
+            <input class="form-control" asp-for="ImageUrl" placeholder="Адрес на изображението">
+            <span asp-validation-for="ImageUrl" class="small text-danger"></span>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Добави" />
+        </form>
+    </div>
+</div>
+
