@@ -2,18 +2,18 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static DataConstants;
+    using static DataConstants.PersonalData;
 
     public class Inquiry
     {
         public int Id { get; init; }
 
         [Required]
-        [MaxLength(FirstNameMaxLength)]
+        [MaxLength(NameMaxLength)]
         public string FirstName { get; set; }
 
         [Required]
-        [MaxLength(LastNameMaxLength)]
+        [MaxLength(NameMaxLength)]
         public string LastName { get; set; }
 
         [Required]

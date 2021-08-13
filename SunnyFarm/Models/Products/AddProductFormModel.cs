@@ -3,18 +3,18 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.DataConstants;
+    using static Data.DataConstants.Product;
 
     public class AddProductFormModel
     {
         [Required]
-        [StringLength(ProductNameMaxLength, MinimumLength = ProductNameMinLength)]
+        [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
         public string Name { get; set; }
 
         [Required]
         [StringLength(
             int.MaxValue, 
-            MinimumLength = ProductDescriptionMinLength,
+            MinimumLength = DescriptionMinLength,
             ErrorMessage = "The field Description must be a string with a minimum length of {2}.")]
         public string Description { get; set; }
 
@@ -22,10 +22,10 @@
         [Url]
         public string ImageUrl { get; set; }
 
-        [Range(ProductSizeMinValue, ProductSizeMaxValue)]
+        [Range(SizeMinValue, SizeMaxValue)]
         public int Size { get; set; }
 
-        [Range(ProductPriceMinValue, ProductPriceMaxValue)]
+        [Range(PriceMinValue, PriceMaxValue)]
         public decimal Price { get; set; }
 
         public int CategoryId { get; set; } // CategoryId, което user-ът изпраща

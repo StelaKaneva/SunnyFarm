@@ -2,25 +2,33 @@
 {
     public class DataConstants
     {
-        public const int FirstNameMinLength = 2;
-        public const int FirstNameMaxLength = 30;
-        public const int LastNameMinLength = 2;
-        public const int LastNameMaxLength = 30;
-        public const int PhoneMinLength = 9;
-        public const int PhoneMaxLength = 20;
-        public const int AddressMinLength = 20;
-        public const int AddressMaxLength = 120;
-        public const int ShopNameMinLength = 5;
-        public const int ShopNameMaxLength = 30;
-        public const int WorkingHoursMinLength = 8;
-        public const int WorkingHoursMaxLength = 100;
-        public const int ProductNameMinLength = 3;
-        public const int ProductNameMaxLength = 60;
-        public const int ProductDescriptionMinLength = 10;
-        public const int ProductSizeMinValue = 1;
-        public const int ProductSizeMaxValue = 999;
-        public const int ProductPriceMinValue = 1;
-        public const int ProductPriceMaxValue = 999;
+        public class PersonalData 
+        {
+            public const int NameMinLength = 2;
+            public const int NameMaxLength = 30;
+            public const int PhoneMinLength = 9;
+            public const int PhoneMaxLength = 20;
+        }
 
+        public class Shop
+        {
+            public const int AddressMinLength = 20;
+            public const int AddressMaxLength = 120;
+            public const int ShopNameMinLength = 5;
+            public const int ShopNameMaxLength = 30;
+            public const int WorkingHoursMinLength = 8;
+            public const int WorkingHoursMaxLength = 100;
+        }
+
+        public class Product
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 60;
+            public const int DescriptionMinLength = 10;
+            public const int SizeMinValue = 1;
+            public const int SizeMaxValue = 999;
+            public const int PriceMinValue = 1;
+            public const int PriceMaxValue = 999;
+        }
     }
 }

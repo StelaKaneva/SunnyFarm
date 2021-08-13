@@ -2,14 +2,15 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using static DataConstants;
+
+    using static DataConstants.Product;
 
     public class Product
     {
         public int Id { get; init; }
 
         [Required]
-        [MaxLength(ProductNameMaxLength)]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
         [Required]

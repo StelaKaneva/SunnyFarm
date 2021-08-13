@@ -1,31 +1,26 @@
 ﻿namespace SunnyFarm.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
-
-    using static DataConstants.Shop;
+    using Microsoft.AspNetCore.Identity;
+    
     using static DataConstants.PersonalData;
 
-    public class Shop
+    public class Partner
     {
         public int Id { get; init; }
 
         [Required]
-        [MaxLength(ShopNameMaxLength)]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(AddressMaxLength)]
-        public string Address { get; set; }
-
-        [Required]
         [MaxLength(PhoneMaxLength)]
+        [Phone]
         public string Phone { get; set; }
 
         [Required]
-        [MaxLength(WorkingHoursMaxLength)]
-        public string WorkingHours { get; set; }
+        public string UserId { get; set; }
 
-        [Required]
-        public string ImageUrl { get; set; }
+        public IdentityUser User { get; set; }
     }
 }

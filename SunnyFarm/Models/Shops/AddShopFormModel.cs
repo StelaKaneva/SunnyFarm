@@ -2,7 +2,8 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static Data.DataConstants;
+    using static Data.DataConstants.Shop;
+    using static Data.DataConstants.PersonalData;
 
     public class AddShopFormModel
     {
