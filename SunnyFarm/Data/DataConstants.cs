@@ -30,5 +30,11 @@
             public const int PriceMinValue = 1;
             public const int PriceMaxValue = 999;
         }
+
+        public class Category
+        {
+            public const int NameMinLength = 3;
+            public const int NameMaxLength = 25;
+        }
     }
 }

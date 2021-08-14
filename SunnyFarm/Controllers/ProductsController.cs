@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
@@ -70,6 +71,7 @@
             return View(query);
         }
 
+        [Authorize]
         public IActionResult Add() => View(new AddProductFormModel
         {
             Categories = this.GetProductCategories()
@@ -77,6 +79,7 @@
 
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddProductFormModel product)
         {
             if (!this.data.Categories.Any(c => c.Id == product.CategoryId))

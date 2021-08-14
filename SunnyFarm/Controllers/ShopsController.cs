@@ -1,6 +1,7 @@
 ﻿namespace SunnyFarm.Controllers
 {
     using System.Linq;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
@@ -42,9 +43,11 @@
             return View(query);
         }
 
+        [Authorize]
         public IActionResult Add() => View();
 
         [HttpPost]
+        [Authorize]
         public IActionResult Add(AddShopFormModel shop)
         {
             if (!ModelState.IsValid)

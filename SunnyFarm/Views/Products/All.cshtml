@@ -1,7 +1,7 @@
 ﻿@model AllProductsQueryModel
 
 @{
-    ViewData["Title"] = "Продукти";
+    ViewBag.Title = "Продукти";
 }
 
 <form method="get">
@@ -71,6 +71,11 @@
            asp-route-sorting="@((int)Model.Sorting)">>></a>
     </div>
 </div>
+
+@if (!Model.Products.Any())
+{
+    <h2 class="text-center">Няма открити продукти по зададените критерии.</h2>
+}
 
 <div class="row">
     @foreach (var product in Model.Products)

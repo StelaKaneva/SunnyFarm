@@ -1,0 +1,26 @@
+﻿@model BecomePartnerFormModel
+
+@{
+    ViewBag.Title = "Стани партньор";
+}
+
+<div class="row">
+    <div class=" col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Name">Име</label>
+                <input class="form-control" asp-for="Name">
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone">Телефонен номер</label>
+                <input class="form-control" asp-for="Phone">
+                <span asp-validation-for="Phone" class="small text-danger"></span>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Добави" />
+        </form>
+    </div>
+</div>
+
+
