@@ -1,5 +1,5 @@
 ﻿namespace SunnyFarm.Controllers.Api
-{ 
+{
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
@@ -7,41 +7,41 @@
     using SunnyFarm.Data.Models;
 
     [ApiController]
-    [Route("api/products")]
-    public class ProductsApiController : ControllerBase
+    [Route("api/shops")]
+    public class ShopsApiController : ControllerBase
     {
         private readonly SunnyFarmDbContext data;
 
-        public ProductsApiController(SunnyFarmDbContext data)
+        public ShopsApiController(SunnyFarmDbContext data)
         {
             this.data = data;
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetProducts()
+        public ActionResult<IEnumerable<Shop>> GetShops()
         {
-            var products = this.data.Products.ToList();
+            var shops = this.data.Shops.ToList();
 
-            if (!products.Any())
+            if (!shops.Any())
             {
                 return NotFound();
             }
 
-            return Ok(products);
+            return Ok(shops);
         }
 
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetDetails(int id)
         {
-            var product = this.data.Products.Find(id);
+            var shop = this.data.Shops.Find(id);
 
-            if (product == null)
+            if (shop == null)
             {
                 return NotFound();
             }
 
-            return Ok(product);
+            return Ok(shop);
         }
     }
 }

@@ -58,6 +58,7 @@
                     ImageUrl = p.ImageUrl,
                     Price = p.Price,
                     Size = p.Size,
+                    IsAvailable = p.IsAvailable,
                     Category = p.Category.Name
                 })
                 .ToList();
@@ -71,7 +72,6 @@
             return View(query);
         }
 
-        [Authorize]
         public IActionResult Add() => View(new AddProductFormModel
         {
             Categories = this.GetProductCategories()
@@ -79,7 +79,6 @@
 
 
         [HttpPost]
-        [Authorize]
         public IActionResult Add(AddProductFormModel product)
         {
             if (!this.data.Categories.Any(c => c.Id == product.CategoryId))
@@ -102,7 +101,7 @@
                 CategoryId = product.CategoryId,
                 Size = product.Size,
                 Price = product.Price,
-                IsAvailable = true
+                IsAvailable = product.IsAvailable
             };
 
             this.data.Products.Add(productData);

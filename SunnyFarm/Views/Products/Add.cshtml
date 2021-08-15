@@ -34,6 +34,11 @@
                 <span asp-validation-for="Size" class="small text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="IsAvailable">Наличен</label>
+                <input class="form-control" asp-for="IsAvailable">
+                <span asp-validation-for="IsAvailable" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="CategoryId">Категория</label>
                 <select asp-for="CategoryId" class="form-control">
                     @foreach (var category in Model.Categories)
@@ -43,7 +48,7 @@
                 </select>
                 <span asp-validation-for="CategoryId" class="small text-danger"></span>
             </div>
-            <input class="btn btn-primary" type="submit" value="Добави"/>
+            <input class="btn btn-primary" type="submit" value="Добави" />
         </form>
     </div>
 </div>
