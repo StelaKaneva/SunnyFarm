@@ -7,67 +7,28 @@
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
     using SunnyFarm.Models.Products;
+    using SunnyFarm.Services.Products;
 
     public class ProductsController : Controller
     {
+        private readonly IProductService products;
         private readonly SunnyFarmDbContext data;
 
-        public ProductsController(SunnyFarmDbContext data)
+        public ProductsController(IProductService products, SunnyFarmDbContext data)
         {
+            this.products = products;
             this.data = data;
         }
 
         public IActionResult All([FromQuery]AllProductsQueryModel query)
         {
-            var productsQuery = this.data.Products.AsQueryable(); // Взима заявката към базата за продуктите
+            var queryResult = this.products.All(query.Category, query.SearchTerm, query.Sorting, query.CurrentPage, AllProductsQueryModel.ProductsPerPage);
 
-            if (!string.IsNullOrWhiteSpace(query.Category))
-            {
-                productsQuery = productsQuery.Where(
-                    c => c.Category.Name == query.Category);
-            }
+            var productCategories = this.products.AllProductCategories();
 
-            if (!string.IsNullOrWhiteSpace(query.SearchTerm))
-            {
-                productsQuery = productsQuery.Where(
-                    p => p.Name.ToLower().Contains(query.SearchTerm.ToLower()) ||
-                    p.Description.ToLower().Contains(query.SearchTerm.ToLower()) ||
-                    p.Category.Name.ToLower().Contains(query.SearchTerm.ToLower()));
-            }
-
-            productsQuery = query.Sorting switch
-            {
-                ProductSorting.Category => productsQuery.OrderBy(p => p.CategoryId).ThenByDescending(p => p.Price),
-                ProductSorting.PriceAscending => productsQuery.OrderBy(p => p.Price),
-                ProductSorting.PriceDescending => productsQuery.OrderByDescending(p => p.Price),
-                ProductSorting.SizeAscending => productsQuery.OrderBy(p => p.Size),
-                ProductSorting.SizeDescending => productsQuery.OrderByDescending(p => p.Size),
-                ProductSorting.DateCreated => productsQuery.OrderByDescending(p => p.Id),
-                _ => productsQuery.OrderBy(p => p.CategoryId).ThenByDescending(p => p.Price)
-            };
-
-            var totalProducts = productsQuery.Count();
-
-            var products = productsQuery
-                .Skip((query.CurrentPage - 1) * AllProductsQueryModel.ProductsPerPage)
-                .Take(AllProductsQueryModel.ProductsPerPage)
-                .Select(p => new ProductListingViewModel
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    ImageUrl = p.ImageUrl,
-                    Price = p.Price,
-                    Size = p.Size,
-                    IsAvailable = p.IsAvailable,
-                    Category = p.Category.Name
-                })
-                .ToList();
-
-            var productCategories = this.data.Categories.Select(c => c.Name).ToList();
-
+            query.TotalProducts = queryResult.TotalProducts;
+            query.Products = queryResult.Products;
             query.Categories = productCategories;
-            query.Products = products;
-            query.TotalProducts = totalProducts;
 
             return View(query);
         }

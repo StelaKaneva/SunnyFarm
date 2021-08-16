@@ -10,6 +10,7 @@ namespace SunnyFarm
     using Microsoft.Extensions.Hosting;
     using SunnyFarm.Data;
     using SunnyFarm.Infrastructure;
+    using SunnyFarm.Services.Products;
 
     public class Startup
     {
@@ -42,6 +43,8 @@ namespace SunnyFarm
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
             });
+
+            services.AddTransient<IProductService, ProductService>();
         }
 
         

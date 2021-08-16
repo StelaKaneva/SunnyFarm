@@ -1,5 +1,6 @@
 ﻿namespace SunnyFarm.Models.Products
 {
+    using SunnyFarm.Services.Products;
     using System.Collections.Generic;
 
     public class AllProductsQueryModel
@@ -18,6 +19,6 @@
 
         public IEnumerable<string> Categories { get; set; }
 
-        public IEnumerable<ProductListingViewModel> Products { get; set; }
+        public IEnumerable<ProductServiceModel> Products { get; set; }
     }
 }
