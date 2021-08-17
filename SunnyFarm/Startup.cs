@@ -11,6 +11,7 @@ namespace SunnyFarm
     using SunnyFarm.Data;
     using SunnyFarm.Infrastructure;
     using SunnyFarm.Services.Products;
+    using SunnyFarm.Services.Shops;
 
     public class Startup
     {
@@ -45,6 +46,7 @@ namespace SunnyFarm
             });
 
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IShopService, ShopService>();
         }
 
         

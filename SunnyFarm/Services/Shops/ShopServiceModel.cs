@@ -1,6 +1,6 @@
-﻿namespace SunnyFarm.Models.Shops
+﻿namespace SunnyFarm.Services.Shops
 {
-    public class ShopListingViewModel
+    public class ShopServiceModel
     {
         public int Id { get; init; }
 

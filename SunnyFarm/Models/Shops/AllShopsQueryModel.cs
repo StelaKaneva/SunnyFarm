@@ -1,5 +1,6 @@
 ﻿namespace SunnyFarm.Models.Shops
 {
+    using SunnyFarm.Services.Shops;
     using System.Collections.Generic;
 
     public class AllShopsQueryModel
@@ -10,6 +11,6 @@
 
         public int TotalShops { get; set; }
 
-        public IEnumerable<ShopListingViewModel> Shops { get; set; }
+        public IEnumerable<ShopServiceModel> Shops { get; set; }
     }
 }

@@ -6,39 +6,25 @@
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
     using SunnyFarm.Models.Shops;
-    
+    using SunnyFarm.Services.Shops;
+
     public class ShopsController : Controller
     {
+        private readonly IShopService shops;
         private readonly SunnyFarmDbContext data;
 
-        public ShopsController(SunnyFarmDbContext data)
+        public ShopsController(IShopService shops, SunnyFarmDbContext data)
         {
+            this.shops = shops;
             this.data = data;
         }
 
         public IActionResult All([FromQuery] AllShopsQueryModel query)
         {
-            var shopsQuery = this.data.Shops.AsQueryable();
+            var queryResult = this.shops.All(query.CurrentPage, AllShopsQueryModel.ProductsPerPage);
 
-            var totalShops = shopsQuery.Count();
-
-            var shops = shopsQuery
-                .OrderByDescending(s => s.Id)
-                .Skip((query.CurrentPage - 1) * AllShopsQueryModel.ProductsPerPage)
-                .Take(AllShopsQueryModel.ProductsPerPage)
-                .Select(s => new ShopListingViewModel
-                {
-                    Id = s.Id,
-                    Name = s.Name,
-                    Address = s.Address,
-                    Phone = s.Phone,
-                    WorkingHours = s.WorkingHours,
-                    ImageUrl = s.ImageUrl
-                })
-                .ToList();
-
-            query.Shops = shops;
-            query.TotalShops = totalShops;
+            query.Shops = queryResult.Shops;
+            query.TotalShops = queryResult.TotalShops;
 
             return View(query);
         }
