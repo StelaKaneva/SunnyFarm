@@ -5,7 +5,7 @@
     using static Data.DataConstants.User;
     using static Data.DataConstants.PersonalData;
 
-    public class UserRegisterFormModel
+    public class RegisterFormModel
     {
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
