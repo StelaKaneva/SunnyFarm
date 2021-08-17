@@ -5,7 +5,7 @@
     using Microsoft.EntityFrameworkCore;
     using SunnyFarm.Data.Models;
 
-    public class SunnyFarmDbContext : IdentityDbContext
+    public class SunnyFarmDbContext : IdentityDbContext<User>
     {
         public SunnyFarmDbContext(DbContextOptions<SunnyFarmDbContext> options)
             : base(options)
@@ -31,7 +31,7 @@
 
             builder
                 .Entity<Partner>()
-                .HasOne<IdentityUser>()
+                .HasOne<User>()
                 .WithOne()
                 .HasForeignKey<Partner>(p => p.UserId)
                 .OnDelete(DeleteBehavior.Restrict);

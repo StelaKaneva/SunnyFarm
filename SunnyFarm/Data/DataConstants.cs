@@ -36,5 +36,16 @@
             public const int NameMinLength = 3;
             public const int NameMaxLength = 25;
         }
+
+        public class User
+        {
+            public const int FullNameMinLength = 3;
+            public const int FullNameMaxLength = 45;
+            public const int AddressMinLength = 8;
+            public const int AddressMaxLength = 90;
+            public const int EmailMinLength = 8;
+            public const int EmailMaxLength = 90;
+            public const int PasswordMinLength = 6;
+        }
     }
 }

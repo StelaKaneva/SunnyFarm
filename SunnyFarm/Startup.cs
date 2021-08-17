@@ -9,6 +9,7 @@ namespace SunnyFarm
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using SunnyFarm.Data;
+    using SunnyFarm.Data.Models;
     using SunnyFarm.Infrastructure;
     using SunnyFarm.Services.Products;
     using SunnyFarm.Services.Shops;
@@ -31,13 +32,14 @@ namespace SunnyFarm
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services
-                .AddDefaultIdentity<IdentityUser>(options =>
+                .AddDefaultIdentity<User>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<SunnyFarmDbContext>();
 
             services.AddControllersWithViews(options =>
