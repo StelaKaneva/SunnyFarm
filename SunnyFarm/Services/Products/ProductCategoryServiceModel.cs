@@ -1,6 +1,6 @@
-﻿namespace SunnyFarm.Models.Products
+﻿namespace SunnyFarm.Services.Products
 {
-    public class ProductCategoryViewModel
+    public class ProductCategoryServiceModel
     {
         public int Id { get; init; }
 

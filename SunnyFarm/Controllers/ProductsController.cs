@@ -12,12 +12,10 @@
     public class ProductsController : Controller
     {
         private readonly IProductService products;
-        private readonly SunnyFarmDbContext data;
 
-        public ProductsController(IProductService products, SunnyFarmDbContext data)
+        public ProductsController(IProductService products)
         {
             this.products = products;
-            this.data = data;
         }
 
         public IActionResult All([FromQuery]AllProductsQueryModel query)
@@ -34,53 +32,90 @@
         }
 
         [Authorize]
-        public IActionResult Add() => View(new AddProductFormModel
+        public IActionResult Add() => View(new ProductFormModel
         {
-            Categories = this.GetProductCategories()
+            Categories = this.products.GetProductCategories()
         });
 
 
         [HttpPost]
         [Authorize]
-        public IActionResult Add(AddProductFormModel product)
+        public IActionResult Add(ProductFormModel product)
         {
-            if (!this.data.Categories.Any(c => c.Id == product.CategoryId))
+            if (!this.products.CategoryExists(product.CategoryId))
             {
                 this.ModelState.AddModelError(nameof(product.CategoryId), "Category does not exist.");
             }
             
             if (!ModelState.IsValid)
             {
-                product.Categories = this.GetProductCategories();
+                product.Categories = this.products.GetProductCategories();
                 
                 return View(product);
             }
 
-            var productData = new Product 
-            {
-                Name = product.Name,
-                Description = product.Description,
-                ImageUrl = product.ImageUrl,
-                CategoryId = product.CategoryId,
-                Size = product.Size,
-                Price = product.Price,
-                IsAvailable = product.IsAvailable
-            };
-
-            this.data.Products.Add(productData);
-            this.data.SaveChanges();
+            this.products.Create(
+                product.Name,
+                product.Description,
+                product.ImageUrl,
+                product.CategoryId,
+                product.Size,
+                product.Price,
+                product.IsAvailable);
 
             return RedirectToAction(nameof(All));
         }
 
-        private IEnumerable<ProductCategoryViewModel> GetProductCategories()
-            => this.data
-                .Categories
-                .Select(c => new ProductCategoryViewModel
-                {
-                    Id = c.Id,
-                    Name = c.Name
-                })
-                .ToList();
+        [Authorize]
+        public IActionResult Edit(int id)
+        {
+            var product = this.products.Details(id);
+
+            return View(new ProductFormModel
+            {
+                Name = product.Name,
+                Description = product.Description,
+                ImageUrl = product.ImageUrl,
+                Size = product.Size,
+                Price = product.Price,
+                IsAvailable = product.IsAvailable,
+                CategoryId = product.CategoryId,
+                Categories = this.products.GetProductCategories()
+            });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(int id, ProductFormModel product)
+        {
+            if (!this.products.CategoryExists(product.CategoryId))
+            {
+                this.ModelState.AddModelError(nameof(product.CategoryId), "Category does not exist.");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                product.Categories = this.products.GetProductCategories();
+
+                return View(product);
+            }
+
+            var productIsEdited = this.products.Edit(
+                id,
+                product.Name,
+                product.Description,
+                product.ImageUrl,
+                product.CategoryId,
+                product.Size,
+                product.Price,
+                product.IsAvailable);
+
+            if (!productIsEdited)
+            {
+                return BadRequest();
+            }
+
+            return RedirectToAction(nameof(All));
+        }
     }
 }

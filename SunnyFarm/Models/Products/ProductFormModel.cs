@@ -1,11 +1,12 @@
 ﻿namespace SunnyFarm.Models.Products
 {
     using System.Collections.Generic;
+    using SunnyFarm.Services.Products;
     using System.ComponentModel.DataAnnotations;
 
     using static Data.DataConstants.Product;
 
-    public class AddProductFormModel
+    public class ProductFormModel
     {
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength)]
@@ -32,6 +33,6 @@
 
         public int CategoryId { get; set; } // CategoryId, което user-ът изпраща
 
-        public IEnumerable<ProductCategoryViewModel> Categories { get; set; } // Категориите, които искам да визуализирам на View-то
+        public IEnumerable<ProductCategoryServiceModel> Categories { get; set; } // Категориите, които искам да визуализирам на View-то
     }
 }

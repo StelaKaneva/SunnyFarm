@@ -12,6 +12,31 @@
             int currentPage,
             int productsPerPage);
 
+        ProductDetailsServiceModel Details(int id);
+
+        int Create(
+                string name,
+                string description,
+                string imageUrl,
+                int categoryId,
+                int size,
+                decimal price,
+                bool isAvailable);
+
+        bool Edit(
+                int id,
+                string name,
+                string description,
+                string imageUrl,
+                int categoryId,
+                int size,
+                decimal price,
+                bool isAvailable);
+
         IEnumerable<string> AllProductCategories();
+
+        IEnumerable<ProductCategoryServiceModel> GetProductCategories();
+
+        bool CategoryExists(int categoryId);
     }
 }

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using SunnyFarm.Data;
+    using SunnyFarm.Data.Models;
     using SunnyFarm.Models.Products;
 
     public class ProductService : IProductService
@@ -74,7 +75,82 @@
             };
         }
 
+        public ProductDetailsServiceModel Details(int id)
+            => this.data
+            .Products
+            .Where(p => p.Id == id)
+            .Select(p => new ProductDetailsServiceModel 
+            {
+                Id = p.Id,
+                Name = p.Name,
+                ImageUrl = p.ImageUrl,
+                Price = p.Price,
+                Size = p.Size,
+                IsAvailable = p.IsAvailable,
+                Category = p.Category.Name,
+                Description = p.Description
+            })
+            .FirstOrDefault();
+
+        public int Create(string name, string description, string imageUrl, int categoryId, int size, decimal price, bool isAvailable)
+        {
+            var productData = new Product
+            {
+                Name = name,
+                Description = description,
+                ImageUrl = imageUrl,
+                CategoryId = categoryId,
+                Size = size,
+                Price = price,
+                IsAvailable = isAvailable
+            };
+
+            this.data.Products.Add(productData);
+            this.data.SaveChanges();
+
+            return productData.Id;
+        }
+
+        public bool Edit(int id, string name, string description, string imageUrl, int categoryId, int size, decimal price, bool isAvailable)
+        {
+            var productData = this.data.Products.Find(id);
+
+            if (productData == null)
+            {
+                return false;
+            }
+
+            productData.Name = name;
+            productData.Description = description;
+            productData.ImageUrl = imageUrl;
+            productData.CategoryId = categoryId;
+            productData.Size = size;
+            productData.Price = price;
+            productData.IsAvailable = isAvailable;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
         public IEnumerable<string> AllProductCategories()
             => this.data.Categories.Select(c => c.Name).ToList();
+
+        public IEnumerable<ProductCategoryServiceModel> GetProductCategories()
+            => this.data
+                .Categories
+                .Select(c => new ProductCategoryServiceModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                })
+                .ToList();
+
+        public bool CategoryExists(int categoryId)
+            => this.data
+            .Categories
+            .Any(c => c.Id == categoryId);
+
+       
     }
 }
