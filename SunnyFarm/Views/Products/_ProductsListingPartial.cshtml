@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ProductServiceModel> 
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3" style="width: 18rem;">
+                <img class="card-img-top" src="@product.ImageUrl" alt="@product.Category - @product.Name (@product.Price - @product.Size)">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">@product.Name - @product.Price лв. (@product.Size гр.)</h5>
+                    <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Детайли</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

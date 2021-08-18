@@ -1,13 +1,24 @@
 ﻿@using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
+@inject IPartnerService Partners
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Partners" asp-action="Become">Стани партньор</a>
-    </li>
+        
+        var userId = User.GetId();
+        var userIsPartner = Partners.IsPartner(userId);
+        
+
+        @if (!userIsPartner)
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Partners" asp-action="Become">Стани партньор</a>
+            </li>
+        }
+
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Профил</a>
         </li>

@@ -11,6 +11,7 @@ namespace SunnyFarm
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
     using SunnyFarm.Infrastructure;
+    using SunnyFarm.Services.Partners;
     using SunnyFarm.Services.Products;
     using SunnyFarm.Services.Shops;
 
@@ -49,6 +50,7 @@ namespace SunnyFarm
 
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IShopService, ShopService>();
+            services.AddTransient<IPartnerService, PartnerService>();
         }
 
         
