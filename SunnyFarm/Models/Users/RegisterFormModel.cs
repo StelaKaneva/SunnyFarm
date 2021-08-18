@@ -20,15 +20,12 @@
         [StringLength(int.MaxValue, MinimumLength = PasswordMinLength)]
         public string Password { get; set; }
 
-        [Required]
         [StringLength(FullNameMaxLength, MinimumLength = FullNameMinLength)]
         public string FullName { get; set; }
 
-        [Required]
         [StringLength(PhoneMaxLength, MinimumLength = PhoneMinLength)]
         public string Phone { get; set; }
 
-        [Required]
         [StringLength(AddressMaxLength, MinimumLength = AddressMinLength)]
         public string Address { get; set; }
     }

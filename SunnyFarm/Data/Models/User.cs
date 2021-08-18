@@ -11,7 +11,6 @@
         [MaxLength(FullNameMaxLength)]
         public string FullName { get; set; }
 
-        [Required]
         [MaxLength(AddressMaxLength)]
         public string Address { get; set; }
     }

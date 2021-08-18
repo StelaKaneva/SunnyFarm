@@ -1,11 +1,7 @@
 ﻿namespace SunnyFarm.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using SunnyFarm.Data;
-    using SunnyFarm.Data.Models;
     using SunnyFarm.Models.Products;
     using SunnyFarm.Services.Products;
 

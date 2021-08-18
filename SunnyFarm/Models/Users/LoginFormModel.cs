@@ -11,7 +11,7 @@
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(int.MaxValue, MinimumLength = PasswordMinLength)]
+        [StringLength(PasswordMaxLength, MinimumLength = PasswordMinLength)]
         public string Password { get; set; }
 
 

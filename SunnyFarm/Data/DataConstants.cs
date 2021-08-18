@@ -46,6 +46,7 @@
             public const int EmailMinLength = 8;
             public const int EmailMaxLength = 90;
             public const int PasswordMinLength = 6;
+            public const int PasswordMaxLength = 100;
         }
     }
 }

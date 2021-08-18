@@ -28,7 +28,6 @@
         {
             var userId = this.User.GetId();
 
-
             var userIsAlreadyPartner = this.data
                 .Partners
                 .Any(p => p.UserId == userId);
