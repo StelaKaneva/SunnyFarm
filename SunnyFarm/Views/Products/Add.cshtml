@@ -4,4 +4,8 @@
     ViewBag.Title = "Добавяне на продукти";
 }
 
-<partial name="_ProductFormPartial" model="@Model"/>
+<partial name="_ProductFormPartial" model="@Model" />
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

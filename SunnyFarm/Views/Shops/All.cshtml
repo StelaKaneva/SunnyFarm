@@ -35,7 +35,7 @@
     @foreach (var shop in Model.Shops)
     {
         <div class="col-md-4">
-            <div class="card mb-3" style="width: 18rem;">
+            <div class="card mb-3">
                 <img class="card-img-top" src="@shop.ImageUrl" alt="@shop.Name">
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">@shop.Name</h5>
@@ -47,6 +47,11 @@
                 </ul>
                 <div class="card-body text-center">
                     <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.Id" class="btn btn-primary ">Детайли</a>
+                    @if (User.IsAdmin())
+                    {
+                        <a asp-controller="Shops" asp-action="Edit" asp-route-id="@shop.Id" class="btn btn-warning">Редактирай</a>
+                        <a asp-controller="Shops" asp-action="Delete" asp-route-id="@shop.Id" class="btn btn-danger">Изтрий</a>
+                    }
                 </div>
             </div>
         </div>

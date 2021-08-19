@@ -27,7 +27,7 @@
             return View(query);
         }
 
-        [Authorize]
+        [Authorize(Roles = WebConstants.AdministratorRoleName)]
         public IActionResult Add() => View(new ProductFormModel
         {
             Categories = this.products.GetProductCategories()
@@ -35,7 +35,7 @@
 
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = WebConstants.AdministratorRoleName)]
         public IActionResult Add(ProductFormModel product)
         {
             if (!this.products.CategoryExists(product.CategoryId))
@@ -62,7 +62,7 @@
             return RedirectToAction(nameof(All));
         }
 
-        [Authorize]
+        [Authorize(Roles = WebConstants.AdministratorRoleName)]
         public IActionResult Edit(int id)
         {
             var product = this.products.Details(id);
@@ -80,7 +80,7 @@
             });
         }
 
-        [Authorize]
+        [Authorize(Roles = WebConstants.AdministratorRoleName)]
         [HttpPost]
         public IActionResult Edit(int id, ProductFormModel product)
         {

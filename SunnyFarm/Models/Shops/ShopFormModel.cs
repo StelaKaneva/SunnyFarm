@@ -5,7 +5,7 @@
     using static Data.DataConstants.Shop;
     using static Data.DataConstants.PersonalData;
 
-    public class AddShopFormModel
+    public class ShopFormModel
     {
         [Required]
         [StringLength(ShopNameMaxLength, MinimumLength = ShopNameMinLength)]

@@ -10,9 +10,9 @@
         
         var userId = User.GetId();
         var userIsPartner = Partners.IsPartner(userId);
-        
+        var userIsAdmin = User.IsAdmin();
 
-        @if (!userIsPartner)
+        @if (!userIsPartner && !userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Partners" asp-action="Become">Стани партньор</a>

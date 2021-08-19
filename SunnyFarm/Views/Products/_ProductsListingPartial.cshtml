@@ -9,8 +9,11 @@
                 <div class="card-body text-center">
                     <h5 class="card-title text-center">@product.Name - @product.Price лв. (@product.Size гр.)</h5>
                     <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id" class="btn btn-primary">Детайли</a>
-                    <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-warning">Редактирай</a>
-                    <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Изтрий</a>
+                    @if (User.IsAdmin())
+                    {
+                        <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-warning">Редактирай</a>
+                        <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Изтрий</a>
+                    }
                 </div>
             </div>
         </div>
