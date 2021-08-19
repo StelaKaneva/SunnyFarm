@@ -17,27 +17,34 @@
         public static IApplicationBuilder PrepareDatabase(
             this IApplicationBuilder app)
         {
-            using var scopedServices = app.ApplicationServices.CreateScope();
+            using var serviceScope = app.ApplicationServices.CreateScope();
 
-            var serviceProvider = scopedServices.ServiceProvider;
+            var services = serviceScope.ServiceProvider;
 
-            var data = serviceProvider.GetRequiredService<SunnyFarmDbContext>();
+            MigrateDatabase(services);
 
-            data.Database.Migrate();
+            SeedCategories(services);
 
-            SeedCategories(data);
+            SeedProducts(services);
 
-            SeedProducts(data);
+            SeedShops(services);
 
-            SeedShops(data);
-
-            SeedAdministrator(serviceProvider);
+            SeedAdministrator(services);
 
             return app;
         }
 
-        private static void SeedShops(SunnyFarmDbContext data)
+        private static void MigrateDatabase(IServiceProvider services)
         {
+            var data = services.GetRequiredService<SunnyFarmDbContext>();
+
+            data.Database.Migrate();
+        }
+
+        private static void SeedShops(IServiceProvider services)
+        {
+            var data = services.GetRequiredService<SunnyFarmDbContext>();
+
             if (data.Shops.Any())
             {
                 return;
@@ -55,8 +62,10 @@
             data.SaveChanges();
         }
 
-        private static void SeedProducts(SunnyFarmDbContext data)
+        private static void SeedProducts(IServiceProvider services)
         {
+            var data = services.GetRequiredService<SunnyFarmDbContext>();
+
             if (data.Products.Any())
             {
                 return;
@@ -90,8 +99,10 @@
 
         }
 
-        private static void SeedCategories(SunnyFarmDbContext data)
+        private static void SeedCategories(IServiceProvider services)
         {
+            var data = services.GetRequiredService<SunnyFarmDbContext>();
+
             if (data.Categories.Any())
             {
                 return;
@@ -112,8 +123,7 @@
             data.SaveChanges();
         }
 
-        private static void SeedAdministrator( 
-            IServiceProvider services)
+        private static void SeedAdministrator(IServiceProvider services)
         {
             var userManager = services.GetRequiredService<UserManager<User>>();
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();

@@ -319,7 +319,6 @@ namespace SunnyFarm.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(90)
                         .HasColumnType("nvarchar(90)");
 

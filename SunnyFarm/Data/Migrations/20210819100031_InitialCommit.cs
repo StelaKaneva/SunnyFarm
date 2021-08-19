@@ -2,7 +2,7 @@
 
 namespace SunnyFarm.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCommit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,7 @@ namespace SunnyFarm.Data.Migrations
                 table: "AspNetUsers",
                 type: "nvarchar(90)",
                 maxLength: 90,
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "FullName",

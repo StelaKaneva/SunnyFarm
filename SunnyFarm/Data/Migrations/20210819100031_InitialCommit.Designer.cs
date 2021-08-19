@@ -10,8 +10,8 @@ using SunnyFarm.Data;
 namespace SunnyFarm.Data.Migrations
 {
     [DbContext(typeof(SunnyFarmDbContext))]
-    [Migration("20210817073233_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210819100031_InitialCommit")]
+    partial class InitialCommit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -321,7 +321,6 @@ namespace SunnyFarm.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasMaxLength(90)
                         .HasColumnType("nvarchar(90)");
 
