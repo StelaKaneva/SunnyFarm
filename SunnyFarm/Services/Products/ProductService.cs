@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
     using SunnyFarm.Models.Products;
@@ -10,10 +12,14 @@
     public class ProductService : IProductService
     {
         private readonly SunnyFarmDbContext data;
+        private readonly IConfigurationProvider mapper;
 
-        public ProductService(SunnyFarmDbContext data)
+        public ProductService(
+            SunnyFarmDbContext data,
+            IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper.ConfigurationProvider;
         }
 
         public ProductQueryServiceModel All(
@@ -80,17 +86,7 @@
             => this.data
             .Products
             .Where(p => p.Id == id)
-            .Select(p => new ProductDetailsServiceModel 
-            {
-                Id = p.Id,
-                Name = p.Name,
-                ImageUrl = p.ImageUrl,
-                Price = p.Price,
-                Size = p.Size,
-                IsAvailable = p.IsAvailable,
-                Category = p.Category.Name,
-                Description = p.Description
-            })
+            .ProjectTo<ProductDetailsServiceModel>(this.mapper)
             .FirstOrDefault();
 
         public int Create(string name, string description, string imageUrl, int categoryId, int size, decimal price, bool isAvailable)
