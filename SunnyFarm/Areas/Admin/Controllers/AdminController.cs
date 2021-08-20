@@ -1,0 +1,13 @@
+﻿namespace SunnyFarm.Areas.Admin.Controllers
+{
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
+    using static AdminConstants;
+
+    [Area(AreaName)]
+    [Authorize(AdministratorRoleName)]
+    public abstract class AdminController : Controller
+    {
+    }
+}

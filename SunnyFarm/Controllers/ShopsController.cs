@@ -1,12 +1,11 @@
 ﻿namespace SunnyFarm.Controllers
 {
-    using System.Linq;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using SunnyFarm.Data;
-    using SunnyFarm.Data.Models;
     using SunnyFarm.Models.Shops;
     using SunnyFarm.Services.Shops;
+
+    using static Areas.Admin.AdminConstants;
 
     public class ShopsController : Controller
     {
@@ -27,11 +26,11 @@
             return View(query);
         }
 
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Add() => View();
 
         [HttpPost]
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Add(ShopFormModel shop)
         {
             if (!ModelState.IsValid)
@@ -49,7 +48,7 @@
             return RedirectToAction(nameof(All));
         }
 
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Edit(int id)
         {
             var shop = this.shops.Details(id);
@@ -64,7 +63,7 @@
             });
         }
 
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         [HttpPost]
         public IActionResult Edit(int id, ShopFormModel shop)
         {

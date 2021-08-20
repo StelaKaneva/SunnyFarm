@@ -15,4 +15,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Models\Shops\" />
+    <Folder Include="Areas\Admin\Models\Products\" />
+    <Folder Include="Areas\Admin\Views\Shops\" />
+    <Folder Include="Areas\Admin\Views\Products\" />
+  </ItemGroup>
+
 </Project>

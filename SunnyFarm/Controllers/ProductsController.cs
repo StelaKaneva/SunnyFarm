@@ -5,6 +5,8 @@
     using SunnyFarm.Models.Products;
     using SunnyFarm.Services.Products;
 
+    using static Areas.Admin.AdminConstants;
+
     public class ProductsController : Controller
     {
         private readonly IProductService products;
@@ -27,7 +29,7 @@
             return View(query);
         }
 
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Add() => View(new ProductFormModel
         {
             Categories = this.products.GetProductCategories()
@@ -35,7 +37,7 @@
 
 
         [HttpPost]
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Add(ProductFormModel product)
         {
             if (!this.products.CategoryExists(product.CategoryId))
@@ -62,7 +64,7 @@
             return RedirectToAction(nameof(All));
         }
 
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Edit(int id)
         {
             var product = this.products.Details(id);
@@ -80,7 +82,7 @@
             });
         }
 
-        [Authorize(Roles = WebConstants.AdministratorRoleName)]
+        [Authorize(Roles = AdministratorRoleName)]
         [HttpPost]
         public IActionResult Edit(int id, ProductFormModel product)
         {

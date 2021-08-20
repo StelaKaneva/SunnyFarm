@@ -46,7 +46,6 @@
                     <li class="list-group-item text-center">@shop.WorkingHours</li>
                 </ul>
                 <div class="card-body text-center">
-                    <a asp-controller="Shops" asp-action="Details" asp-route-id="@shop.Id" class="btn btn-primary ">Детайли</a>
                     @if (User.IsAdmin())
                     {
                         <a asp-controller="Shops" asp-action="Edit" asp-route-id="@shop.Id" class="btn btn-warning">Редактирай</a>

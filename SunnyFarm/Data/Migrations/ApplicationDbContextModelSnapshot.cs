@@ -334,7 +334,6 @@ namespace SunnyFarm.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .IsRequired()
                         .HasMaxLength(45)
                         .HasColumnType("nvarchar(45)");
 

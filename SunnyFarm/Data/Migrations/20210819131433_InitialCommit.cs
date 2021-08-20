@@ -18,8 +18,7 @@ namespace SunnyFarm.Data.Migrations
                 table: "AspNetUsers",
                 type: "nvarchar(45)",
                 maxLength: 45,
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Categories",

@@ -7,7 +7,6 @@
 
     public class User : IdentityUser
     {
-        [Required]
         [MaxLength(FullNameMaxLength)]
         public string FullName { get; set; }
 

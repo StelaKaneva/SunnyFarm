@@ -10,7 +10,7 @@
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
 
-    using static WebConstants;
+    using static Areas.Admin.AdminConstants;
 
     public static class ApplicationBuiderExtensions
     {
