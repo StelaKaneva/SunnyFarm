@@ -1,7 +1,7 @@
 ﻿namespace SunnyFarm.Models.Products
 {
     using System.Collections.Generic;
-    using SunnyFarm.Services.Products;
+    using SunnyFarm.Services.Products.Models;
     using System.ComponentModel.DataAnnotations;
 
     using static Data.DataConstants.Product;

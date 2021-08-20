@@ -43,6 +43,8 @@ namespace SunnyFarm
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<SunnyFarmDbContext>();
 
+            services.AddAutoMapper(typeof(Startup));// Търси mappings в същия проект, в който се намира StartUp
+
             services.AddControllersWithViews(options =>
             {
                 options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();

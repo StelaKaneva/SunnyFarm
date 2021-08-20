@@ -1,6 +1,6 @@
 ﻿namespace SunnyFarm.Models.Products
 {
-    using SunnyFarm.Services.Products;
+    using SunnyFarm.Services.Products.Models;
     using System.Collections.Generic;
 
     public class AllProductsQueryModel

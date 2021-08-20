@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace SunnyFarm.Services.Products
+﻿namespace SunnyFarm.Services.Products.Models
 {
+    using System.Collections.Generic;
+
     public class ProductQueryServiceModel
     {
         public int CurrentPage { get; init; }

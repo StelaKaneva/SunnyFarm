@@ -5,6 +5,7 @@
     using SunnyFarm.Data;
     using SunnyFarm.Data.Models;
     using SunnyFarm.Models.Products;
+    using SunnyFarm.Services.Products.Models;
 
     public class ProductService : IProductService
     {

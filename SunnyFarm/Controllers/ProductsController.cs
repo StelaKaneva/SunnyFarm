@@ -1,5 +1,6 @@
 ﻿namespace SunnyFarm.Controllers
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using SunnyFarm.Models.Products;
@@ -10,10 +11,14 @@
     public class ProductsController : Controller
     {
         private readonly IProductService products;
+        private readonly IMapper mapper;
 
-        public ProductsController(IProductService products)
+        public ProductsController(
+            IProductService products, 
+            IMapper mapper)
         {
             this.products = products;
+            this.mapper = mapper;
         }
 
         public IActionResult All([FromQuery]AllProductsQueryModel query)
@@ -69,17 +74,10 @@
         {
             var product = this.products.Details(id);
 
-            return View(new ProductFormModel
-            {
-                Name = product.Name,
-                Description = product.Description,
-                ImageUrl = product.ImageUrl,
-                Size = product.Size,
-                Price = product.Price,
-                IsAvailable = product.IsAvailable,
-                CategoryId = product.CategoryId,
-                Categories = this.products.GetProductCategories()
-            });
+            var productForm = this.mapper.Map<ProductFormModel>(product);
+            productForm.Categories = this.products.GetProductCategories();
+
+            return View(productForm);
         }
 
         [Authorize(Roles = AdministratorRoleName)]

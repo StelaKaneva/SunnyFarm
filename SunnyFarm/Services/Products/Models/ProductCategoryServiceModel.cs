@@ -1,4 +1,4 @@
-﻿namespace SunnyFarm.Services.Products
+﻿namespace SunnyFarm.Services.Products.Models
 {
     public class ProductCategoryServiceModel
     {

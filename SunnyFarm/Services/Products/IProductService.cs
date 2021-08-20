@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using SunnyFarm.Models.Products;
+    using SunnyFarm.Services.Products.Models;
 
     public interface IProductService
     {
