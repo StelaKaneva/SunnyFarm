@@ -34,6 +34,13 @@
             return View(query);
         }
 
+        public IActionResult Details(int id)
+        {
+            var product = products.Details(id);
+
+            return View(product);
+        }
+
         [Authorize(Roles = AdministratorRoleName)]
         public IActionResult Add() => View(new ProductFormModel
         {

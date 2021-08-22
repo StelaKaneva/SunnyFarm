@@ -12,6 +12,7 @@
             this.CreateMap<ProductDetailsServiceModel, ProductFormModel>()
                 .ReverseMap();
             this.CreateMap<Product, ProductDetailsServiceModel>()
+                .ForMember(p => p.CategoryName, cfg => cfg.MapFrom(p => p.Category.Name))
                 .ReverseMap();
         }
     }

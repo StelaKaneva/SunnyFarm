@@ -1,0 +1,20 @@
+﻿@model ProductDetailsServiceModel
+
+@{
+    ViewBag.Title = "Детайли";
+}
+
+<div class="col-md-6 offset-3">
+    <div class="card mb-3">
+        <img class="card-img-top" src="@Model.ImageUrl" alt="@Model.Name">
+        <div class="card-body text-center">
+            <h5 class="card-title text-center">@Model.Name</h5>
+            <p class="card-text">@Model.Description</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item text-center">@Model.CategoryName</li>
+            <li class="list-group-item text-center">@Model.Price лв.</li>
+            <li class="list-group-item text-center">@Model.Size гр.</li>
+        </ul>
+    </div>
+</div>
