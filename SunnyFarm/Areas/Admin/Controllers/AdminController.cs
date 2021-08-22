@@ -6,7 +6,7 @@
     using static AdminConstants;
 
     [Area(AreaName)]
-    [Authorize(AdministratorRoleName)]
+    [Authorize(Roles = AdministratorRoleName)]
     public abstract class AdminController : Controller
     {
     }

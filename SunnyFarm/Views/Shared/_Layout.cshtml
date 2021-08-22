@@ -24,7 +24,7 @@
                         @if (User.IsAdmin())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Add">ДОБАВЯНЕ НА ПРОДУКТИ</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Products" asp-action="Add">ДОБАВЯНЕ НА ПРОДУКТИ</a>
                             </li>
                         }
                         <li class="nav-item">
@@ -33,7 +33,7 @@
                         @if (User.IsAdmin())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="Add">ДОБАВЯНЕ НА МАГАЗИНИ</a>
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Shops" asp-action="Add">ДОБАВЯНЕ НА МАГАЗИНИ</a>
                             </li>
                         }
                         <li class="nav-item">

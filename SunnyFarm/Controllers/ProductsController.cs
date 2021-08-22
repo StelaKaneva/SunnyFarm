@@ -34,6 +34,8 @@
             return View(query);
         }
 
+        
+
         public IActionResult Details(int id)
         {
             var product = products.Details(id);
@@ -41,84 +43,8 @@
             return View(product);
         }
 
-        [Authorize(Roles = AdministratorRoleName)]
-        public IActionResult Add() => View(new ProductFormModel
-        {
-            Categories = this.products.GetProductCategories()
-        });
+        
 
-
-        [HttpPost]
-        [Authorize(Roles = AdministratorRoleName)]
-        public IActionResult Add(ProductFormModel product)
-        {
-            if (!this.products.CategoryExists(product.CategoryId))
-            {
-                this.ModelState.AddModelError(nameof(product.CategoryId), "Category does not exist.");
-            }
-            
-            if (!ModelState.IsValid)
-            {
-                product.Categories = this.products.GetProductCategories();
-                
-                return View(product);
-            }
-
-            this.products.Create(
-                product.Name,
-                product.Description,
-                product.ImageUrl,
-                product.CategoryId,
-                product.Size,
-                product.Price,
-                product.IsAvailable);
-
-            return RedirectToAction(nameof(All));
-        }
-
-        [Authorize(Roles = AdministratorRoleName)]
-        public IActionResult Edit(int id)
-        {
-            var product = this.products.Details(id);
-
-            var productForm = this.mapper.Map<ProductFormModel>(product);
-            productForm.Categories = this.products.GetProductCategories();
-
-            return View(productForm);
-        }
-
-        [Authorize(Roles = AdministratorRoleName)]
-        [HttpPost]
-        public IActionResult Edit(int id, ProductFormModel product)
-        {
-            if (!this.products.CategoryExists(product.CategoryId))
-            {
-                this.ModelState.AddModelError(nameof(product.CategoryId), "Category does not exist.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                product.Categories = this.products.GetProductCategories();
-
-                return View(product);
-            }
-
-            var productIsEdited = this.products.Edit(
-                id,
-                product.Name,
-                product.Description,
-                product.ImageUrl,
-                product.CategoryId,
-                product.Size,
-                product.Price,
-                product.IsAvailable);
-
-            if (!productIsEdited)
-            {
-                return BadRequest();
-            }
-
-            return RedirectToAction(nameof(All));
-        }
+        
     }
 }
