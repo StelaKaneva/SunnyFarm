@@ -5,8 +5,6 @@
     using SunnyFarm.Models.Products;
     using SunnyFarm.Services.Products;
 
-    using static SunnyFarm.Areas.Admin.AdminConstants;
-
     public class ProductsController : AdminController
     {
         private readonly IProductService products;
@@ -95,6 +93,5 @@
 
             return RedirectToAction("Details", "Products", new { area = "", id = id });
         }
-
     }
 }

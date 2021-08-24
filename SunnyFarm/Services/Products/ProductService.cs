@@ -147,7 +147,5 @@
             => this.data
             .Categories
             .Any(c => c.Id == categoryId);
-
-       
     }
 }

@@ -12,7 +12,6 @@
                     @if (User.IsAdmin())
                     {
                         <a asp-controller="Products" asp-action="Edit" asp-area="Admin" asp-route-id="@product.Id" class="btn btn-warning">Редактирай</a>
-                        <a asp-controller="Products" asp-action="Delete" asp-area="Admin" asp-route-id="@product.Id" class="btn btn-danger">Изтрий</a>
                     }
                 </div>
             </div>

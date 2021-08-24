@@ -15,7 +15,7 @@
 
         public ShopQueryServiceModel All(
             int currentPage,
-            int productsPerPage)
+            int shopsPerPage)
         {
             var shopsQuery = this.data.Shops.AsQueryable();
 
@@ -23,8 +23,8 @@
 
             var shops = shopsQuery
                 .OrderByDescending(s => s.Id)
-                .Skip((currentPage - 1) * productsPerPage)
-                .Take(productsPerPage)
+                .Skip((currentPage - 1) * shopsPerPage)
+                .Take(shopsPerPage)
                 .Select(s => new ShopServiceModel
                 {
                     Id = s.Id,
@@ -39,7 +39,7 @@
             return new ShopQueryServiceModel
             {
                 CurrentPage = currentPage,
-                ProductsPerPage = productsPerPage,
+                ShopsPerPage = shopsPerPage,
                 TotalShops = totalShops,
                 Shops = shops
             };

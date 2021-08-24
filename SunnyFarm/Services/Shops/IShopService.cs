@@ -4,7 +4,7 @@
     {
         ShopQueryServiceModel All(
             int currentPage,
-            int productsPerPage);
+            int shopsPerPage);
 
         ShopServiceModel Details(int id);
 
@@ -22,6 +22,5 @@
                 string phone,
                 string workingHours,
                 string imageUrl);
-
     }
 }

@@ -6,8 +6,6 @@
     using SunnyFarm.Models.Products;
     using SunnyFarm.Services.Products;
 
-    using static Areas.Admin.AdminConstants;
-
     public class ProductsController : Controller
     {
         private readonly IProductService products;

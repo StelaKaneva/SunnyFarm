@@ -4,7 +4,7 @@
 
     public class ShopQueryServiceModel
     {
-        public int ProductsPerPage { get; init; }
+        public int ShopsPerPage { get; init; }
 
         public int CurrentPage { get; init; }
 
