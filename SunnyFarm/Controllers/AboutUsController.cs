@@ -4,6 +4,6 @@
 
     public class AboutUsController : Controller
     {
-        public IActionResult Index() => View();
+        public IActionResult Details() => View();
     }
 }
