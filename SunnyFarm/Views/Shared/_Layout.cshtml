@@ -39,6 +39,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Shops" asp-action="All">МАГАЗИНИ</a>
                         </li>
+                        @if (!User.IsAdmin())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Inquiries" asp-action="Add">ЗАПИТВАНЕ</a>
+                            </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

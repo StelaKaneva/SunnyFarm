@@ -1,0 +1,43 @@
+﻿@model InquiryFormModel
+
+@{
+    ViewBag.Title = "Запитване";
+}
+
+<div class="row">
+    <div class=" col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <h2 class="heading-margin text-center">@ViewBag.Title</h2>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="FirstName">Име</label>
+                <input class="form-control" asp-for="FirstName">
+                <span asp-validation-for="FirstName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName">Фамилия</label>
+                <input class="form-control" asp-for="LastName">
+                <span asp-validation-for="LastName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Имейл</label>
+                <input class="form-control" asp-for="Email">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone">Телефонен номер</label>
+                <input class="form-control" asp-for="Phone">
+                <span asp-validation-for="Phone" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message">Запитване</label>
+                <textarea asp-for="Message" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="Message" class="small text-danger"></span>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Изпрати" />
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
